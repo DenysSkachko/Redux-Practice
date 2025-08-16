@@ -6,16 +6,18 @@ import { selectorRecipe } from '../utils/selectors';
 import Input from '../components/ui/Input';
 import PageTitle from '../components/PageTitle';
 import RecipesSection from '../components/RecipeSection';
+import { filterRecipes } from '../utils/search';
 
 const Search = () => {
   const recipes = useSelector(selectorRecipe);
   const [query, setQuery] = useState('');
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  
   useEffect(() => {
-    const filtered = recipes.filter((r) => r.title.toLowerCase().includes(query.toLowerCase()));
-    setFilteredRecipes(filtered);
-  }, [query, recipes]);
+  const filtered = filterRecipes(recipes, query);
+  setFilteredRecipes(filtered);
+}, [query, recipes]);
 
   return (
     <div className="flex gap-20">
