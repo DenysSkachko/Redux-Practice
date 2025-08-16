@@ -1,35 +1,38 @@
 import { useEffect, useState } from 'react';
-import { isBookmarked, deleteBookmark } from '../utils/bookmarks';
+
+const STORAGE_KEY = 'bookmarks';
 
 const useBookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('bookmarks');
+    const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       setBookmarks(JSON.parse(saved));
     }
   }, []);
 
-  const addBookmark = (recipe) => {
-    const exists = isBookmarked(bookmarks, recipe);
-    if (!exists) {
-      const updated = [...bookmarks, recipe];
+  const addBookmark = (id) => {
+    if (!bookmarks.includes(id)) {
+      const updated = [...bookmarks, id];
       setBookmarks(updated);
-      localStorage.setItem('bookmarks', JSON.stringify(updated));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     }
   };
 
   const removeBookmark = (id) => {
-    const updated = deleteBookmark(bookmarks, id);
+    const updated = bookmarks.filter((bid) => bid !== id);
     setBookmarks(updated);
-    localStorage.setItem('bookmarks', JSON.stringify(updated));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   };
+
+  const isBookmarked = (id) => bookmarks.includes(id);
 
   return {
     bookmarks,
     addBookmark,
     removeBookmark,
+    isBookmarked,
   };
 };
 

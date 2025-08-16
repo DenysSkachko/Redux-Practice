@@ -1,14 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-dark: #1a1a1a;
   --color-light: #f9f9f9;
   --color-light-alt: #e0e0e0;
-  --color-primary: #F7E4BB;
-  --color-primary-alt: #EBC060;
-  --color-secondary: #9CB82E;
-  --color-accent: #32AFA9;
-  --color-accent-alt: #2C8C8C;
+  --color-primary: #f7e4bb;
+  --color-primary-alt: #ebc060;
+  --color-secondary: #9cb82e;
+  --color-accent: #32afa9;
+  --color-accent-alt: #2c8c8c;
 }
 
 :root {
@@ -26,14 +26,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 body {
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-
+  overflow-x: hidden;
 }
 
 * {

@@ -28,9 +28,9 @@ const RecipesSection = ({
         <p className="text-accent">{showSearch ? 'No recipes found.' : 'No recipes yet.'}</p>
       ) : (
         <ul className="grid grid-cols-2 gap-14 w-fit">
-          {recipes.map((recipe) => (
+          {recipes.map((recipe, index) => (
             <RecipeCard
-              key={recipe.id}
+              key={recipe.id || index}
               recipe={recipe}
               onSelect={onSelect}
               isSelected={selectedRecipe?.id === recipe.id}

@@ -6,7 +6,7 @@ import { selectorRecipe } from '../utils/selectors';
 import Input from '../components/ui/Input';
 import PageTitle from '../components/PageTitle';
 import RecipesSection from '../components/RecipeSection';
-import { filterRecipes } from '../utils/search';
+import searchRecipes from '../utils/search';
 
 const Search = () => {
   const recipes = useSelector(selectorRecipe);
@@ -15,7 +15,7 @@ const Search = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   
   useEffect(() => {
-  const filtered = filterRecipes(recipes, query);
+  const filtered = searchRecipes(recipes, query);
   setFilteredRecipes(filtered);
 }, [query, recipes]);
 

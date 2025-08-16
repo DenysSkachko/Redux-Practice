@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectorRecipe } from '../utils/selectors';
 import RecipeDetails from '../components/RecipeDetail';
-import RecipeCard from '../components/RecipeCard';
-import useBookmarks from '../hooks/useBookmarks';
 import PageTitle from '../components/PageTitle';
 import RecipesSection from '../components/RecipeSection';
+import useBookmarks from '../hooks/useBookmarks';
 
 const Bookmarks = () => {
+  const allRecipes = useSelector(selectorRecipe);
   const { bookmarks } = useBookmarks();
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+
+  const bookmarkedRecipes = allRecipes.filter((recipe) =>
+    bookmarks.includes(recipe.id)
+  );
 
   return (
     <div className="flex gap-20">
@@ -16,7 +22,7 @@ const Bookmarks = () => {
 
         <RecipesSection
           title="My bookmarks"
-          recipes={bookmarks}
+          recipes={bookmarkedRecipes}
           selectedRecipe={selectedRecipe}
           onSelect={setSelectedRecipe}
         />

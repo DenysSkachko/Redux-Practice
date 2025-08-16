@@ -1,15 +1,16 @@
 import useBookmarks from '../hooks/useBookmarks';
 import { isBookmarked } from '../utils/bookmarks';
+import { Link } from 'react-router-dom';
 
 const RecipeDetail = ({ recipe }) => {
-  const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+  const { bookmarks, addBookmark, removeBookmark, isBookmarked } = useBookmarks();
 
-  const bookmarked = isBookmarked(bookmarks, recipe);
+  const bookmarked = isBookmarked(recipe.id);
 
   return (
     <div className="relative bg-primary text-dark h-fit p-[30px] rounded-[30px] overflow-hidden">
       <button
-        onClick={() => (bookmarked ? removeBookmark(recipe.id) : addBookmark(recipe))}
+        onClick={() => (bookmarked ? removeBookmark(recipe.id) : addBookmark(recipe.id))}
         className="absolute top-5 right-5 z-20 bg-light p-4 rounded-full"
       >
         <img
@@ -50,12 +51,12 @@ const RecipeDetail = ({ recipe }) => {
             <li className="font-medium text-lg">No ingredients</li>
           )}
         </ul>
-        <button
-          onClick={() => navigate(`/recipe/${recipe.id}`)}
-          className="px-[70px] py-[15px] rounded-[30px] w-full text-center bg-[#32AFA9] text-light font-medium text-2xl"
+        <Link
+          to={`/recipe/${recipe.id}`}
+          className="px-[70px] py-[15px] rounded-[30px] w-full text-center bg-[#32AFA9] text-light font-medium text-2xl block"
         >
           VIEW RECIPE
-        </button>
+        </Link>
       </div>
     </div>
   );

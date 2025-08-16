@@ -4,6 +4,7 @@ import AddRecipe from './pages/AddRecipe';
 import Bookmarks from './pages/Bookmarks';
 import Search from './pages/Search';
 import Layout from './components/Layout';
+import RecipeSingle from './components/RecipeSingle';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/add" element={<AddRecipe />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/recipe/:id" element={<RecipeSingle />} />
         </Routes>
       </Layout>
     </Router>
