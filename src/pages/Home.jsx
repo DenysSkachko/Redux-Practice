@@ -4,6 +4,8 @@ import { fetchRecipes } from '../store/recipeActions';
 import RecipeDetails from '../components/RecipeDetail';
 import RecipeCard from '../components/RecipeCard';
 import { selectorRecipe } from '../utils/selectors';
+import PageTitle from '../components/PageTitle';
+import RecipesSection from '../components/RecipeSection';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,32 +25,20 @@ const Home = () => {
   return (
     <div className="flex gap-20">
       <div>
-        <div className="flex w-full max-w-[717px] justify-between items-center mb-15">
-          <h1 className="font-bold text-4xl text-primary-alt uppercase">Food</h1>
-          <a href="/add" className="text-primary-alt flex gap-6 items-center cursor-pointer">
-            <img src="/add.svg" alt="" width={30} height={30} />
-            <p className="text-2xl">Add new recipe</p>
-          </a>
-        </div>
+        <PageTitle
+          title="Food"
+          showButton={true}
+          buttonText="Add new recipe"
+          buttonIcon="/add.svg"
+          buttonLink="/add"
+        />
 
-        <div className="flex flex-col gap-[30px]">
-          <h2 className="font-medium text-4xl text-[#9CB82E] uppercase">EXPLORE RECIPES</h2>
-
-          {recipes.length === 0 ? (
-            <p className="text-accent">No recipes yet.</p>
-          ) : (
-            <ul className="grid grid-cols-2 gap-14 w-fit">
-              {recipes.map((recipe) => (
-                <RecipeCard
-                  key={recipe.id}
-                  recipe={recipe}
-                  onSelect={setSelectedRecipe}
-                  isSelected={selectedRecipe?.id === recipe.id}
-                />
-              ))}
-            </ul>
-          )}
-        </div>
+        <RecipesSection
+          title="Explore Recipes"
+          recipes={recipes}
+          selectedRecipe={selectedRecipe}
+          onSelect={setSelectedRecipe}
+        />
       </div>
 
       <div className="w-106 rounded-[30px] overflow-hidden">

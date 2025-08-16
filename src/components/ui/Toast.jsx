@@ -9,7 +9,7 @@ const Toast = ({ message, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-lg animate-slide-in">
+    <div className="fixed bottom-5 right-5 bg-accent text-white px-4 py-2 rounded shadow-lg animate-slide-in">
       {message}
     </div>
   );

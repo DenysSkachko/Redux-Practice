@@ -1,5 +1,4 @@
 import useBookmarks from '../hooks/useBookmarks';
-
 import { isBookmarked } from '../utils/bookmarks';
 
 const RecipeDetail = ({ recipe }) => {
