@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchRecipes } from '../store/recipeActions';
 import RecipeDetails from '../components/RecipeDetail';
 import RecipeCard from '../components/RecipeCard';
+import { selectorRecipe } from '../utils/selectors';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes.items);
+  const recipes = useSelector(selectorRecipe);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {

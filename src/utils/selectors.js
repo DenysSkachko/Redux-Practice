@@ -1,0 +1,1 @@
+export const selectorRecipe = (state) => state.recipes.items
