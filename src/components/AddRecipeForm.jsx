@@ -72,7 +72,7 @@ const AddRecipeForm = () => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 p-30 max-w-150 w-full"
+        className="flex flex-col gap-4 max-w-150 w-full"
       >
         <Input type="text" placeholder="Title" {...register('title')} />
         <Input type="text" placeholder="Description" {...register('description')} />
