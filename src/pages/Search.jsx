@@ -21,7 +21,7 @@ const Search = () => {
 
   return (
     <div className="flex gap-20">
-      <div>
+      <div className="w-[717px]">
         <PageTitle title="Search" />
 
         <RecipesSection

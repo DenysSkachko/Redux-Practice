@@ -17,7 +17,7 @@ const Bookmarks = () => {
 
   return (
     <div className="flex gap-20">
-      <div>
+      <div className="w-[717px]">
         <PageTitle title="Bookmarks" />
 
         <RecipesSection

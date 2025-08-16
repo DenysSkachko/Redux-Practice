@@ -23,8 +23,8 @@ const Home = () => {
   }, [recipes, selectedRecipe]);
 
   return (
-    <div className="flex gap-20">
-      <div>
+    <div className="flex gap-20 ">
+      <div className="w-[717px]">
         <PageTitle
           title="Food"
           showButton={true}

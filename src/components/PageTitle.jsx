@@ -12,7 +12,7 @@ const PageTitle = ({ title, showButton, buttonText, buttonIcon, onAddClick, butt
   };
 
   return (
-    <div className="flex w-full max-w-[717px] justify-between items-center mb-15 gap-10">
+    <div className="flex justify-between items-center mb-15 gap-10">
       <h1 className="font-bold text-4xl text-primary-alt uppercase">{title}</h1>
       {showButton && (
         <button
