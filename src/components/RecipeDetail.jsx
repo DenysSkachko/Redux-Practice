@@ -1,6 +1,24 @@
+import useBookmarks from '../hooks/useBookmarks';
+
+import { isBookmarked } from '../utils/bookmarks';
+
 const RecipeDetail = ({ recipe }) => {
+  const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+
+  const bookmarked = isBookmarked(bookmarks, recipe);
+
   return (
     <div className="relative bg-primary text-dark h-fit p-[30px] rounded-[30px] overflow-hidden">
+      <button
+        onClick={() => (bookmarked ? removeBookmark(recipe.id) : addBookmark(recipe))}
+        className="absolute top-5 right-5 z-20 bg-light p-4 rounded-full"
+      >
+        <img
+          src={bookmarked ? '/book.svg' : '/book-empty.svg'}
+          alt="bookmark"
+          className="w-8 h-8 cursor-pointer"
+        />
+      </button>
       {recipe.image ? (
         <img
           src={recipe.image}
