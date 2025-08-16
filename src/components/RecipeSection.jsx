@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import RecipeCard from './RecipeCard';
 import Input from './ui/Input';
 import { getAllTags, filterByTags, addTag, removeTag, clearTags, getTagColor } from '../utils/tags';
+import searchRecipes from '../utils/search';
 
 const RecipesSection = ({
   title,
@@ -19,9 +20,7 @@ const RecipesSection = ({
   const displayedRecipes = useMemo(() => {
     let filtered = filterByTags(recipes, activeTags);
     if (searchValue) {
-      filtered = filtered.filter((r) =>
-        r.title.toLowerCase().includes(searchValue.toLowerCase())
-      );
+      filtered = searchRecipes(filtered, searchValue);
     }
     return filtered;
   }, [recipes, activeTags, searchValue]);
