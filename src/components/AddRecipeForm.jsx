@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { newRecipe } from '../store/recipeActions';
 import { useState } from 'react';
 import Toast from './ui/Toast';
+import AddFormPreview from './AddFormPreview';
 
 const defaultValue = {
   title: '',
@@ -22,7 +23,7 @@ const AddRecipeForm = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
 
-  const { register, handleSubmit, control, setValue, reset } = useForm({
+  const { register, handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: defaultValue,
   });
 
@@ -68,23 +69,46 @@ const AddRecipeForm = () => {
     setToastMessage('Recipe added successfully!');
   };
 
+  const watchAll = watch();
+
   return (
-    <>
+    <div className="flex gap-6 w-full">
+      {/* Левая часть — превью */}
+      <div className="flex-1">
+        <AddFormPreview data={watchAll} />
+      </div>
+
+      {/* Правая часть — форма */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 max-w-150 w-full"
+        className="flex flex-col gap-4 flex-1 max-w-150"
       >
         <Input type="text" placeholder="Title" {...register('title')} />
         <Input type="text" placeholder="Description" {...register('description')} />
         <Input type="file" onChange={handleFileChange} />
-        {imagePreview && <img src={imagePreview} alt="Preview" className="w-32 h-32 object-cover rounded-lg" />}
+        {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className="w-32 h-32 object-cover rounded-lg"
+          />
+        )}
 
         <FieldContainer>
           <SectionTitle>Ingredients</SectionTitle>
           {ingredients.map((field, index) => (
             <div key={field.id} className="flex gap-2">
-              <Input type="text" placeholder="Ingredient" {...register(`ingredients.${index}.name`)} />
-              <Input type="text" placeholder="#" {...register(`ingredients.${index}.quantity`)} className="w-15" />
+              <Input
+                type="text"
+                placeholder="Ingredient"
+                {...register(`ingredients.${index}.name`)}
+              />
+              <Input
+                type="text"
+                placeholder="#"
+                {...register(`ingredients.${index}.quantity`)}
+                className="w-15"
+              />
               <RemoveButton onClick={() => removeIngredient(index)}>
                 <MdDelete />
               </RemoveButton>
@@ -99,7 +123,12 @@ const AddRecipeForm = () => {
           <SectionTitle>Tags</SectionTitle>
           {tags.map((field, index) => (
             <div key={field.id} className="flex w-full gap-2">
-              <Input type="text" placeholder="Tag" {...register(`tags.${index}`)} className="flex-1" />
+              <Input
+                type="text"
+                placeholder="Tag"
+                {...register(`tags.${index}`)}
+                className="flex-1"
+              />
               <RemoveButton onClick={() => removeTag(index)}>
                 <MdDelete />
               </RemoveButton>
@@ -114,7 +143,12 @@ const AddRecipeForm = () => {
           <SectionTitle>Steps</SectionTitle>
           {steps.map((field, index) => (
             <div key={field.id} className="flex gap-2">
-              <Input type="text" placeholder={`Step ${index + 1}`} {...register(`steps.${index}.text`)} className="flex-1" />
+              <Input
+                type="text"
+                placeholder={`Step ${index + 1}`}
+                {...register(`steps.${index}.text`)}
+                className="flex-1"
+              />
               <RemoveButton onClick={() => removeStep(index)}>
                 <MdDelete />
               </RemoveButton>
@@ -125,13 +159,18 @@ const AddRecipeForm = () => {
           </AddButton>
         </FieldContainer>
 
-        <button type="submit" className="bg-accent text-xl rounded-lg py-2 px-4 cursor-pointer hover:bg-accent-alt">
+        <button
+          type="submit"
+          className="bg-accent text-xl rounded-lg py-2 px-4 cursor-pointer hover:bg-accent-alt"
+        >
           Add Recipe
         </button>
       </form>
 
-      {toastMessage && <Toast message={toastMessage} onClose={() => setToastMessage('')} />}
-    </>
+      {toastMessage && (
+        <Toast message={toastMessage} onClose={() => setToastMessage('')} />
+      )}
+    </div>
   );
 };
 

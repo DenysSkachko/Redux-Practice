@@ -4,7 +4,7 @@ import AddRecipe from './pages/AddRecipe';
 import Bookmarks from './pages/Bookmarks';
 import Search from './pages/Search';
 import Layout from './components/Layout';
-import RecipeSingle from './components/RecipeSingle';
+import RecipeSingle from './pages/RecipeSingle';
 
 function App() {
   return (
