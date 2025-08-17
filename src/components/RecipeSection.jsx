@@ -1,29 +1,20 @@
 import { useState, useMemo } from 'react';
 import RecipeCard from './RecipeCard';
-import Input from './ui/Input';
 import { getAllTags, filterByTags, addTag, removeTag, clearTags, getTagColor } from '../utils/tags';
-import searchRecipes from '../utils/search';
 
 const RecipesSection = ({
   title,
   recipes,
   selectedRecipe,
   onSelect,
-  showSearch = false,
-  searchValue,
-  onSearchChange,
 }) => {
   const [activeTags, setActiveTags] = useState([]);
 
   const allTags = useMemo(() => getAllTags(recipes), [recipes]);
 
   const displayedRecipes = useMemo(() => {
-    let filtered = filterByTags(recipes, activeTags);
-    if (searchValue) {
-      filtered = searchRecipes(filtered, searchValue);
-    }
-    return filtered;
-  }, [recipes, activeTags, searchValue]);
+    return filterByTags(recipes, activeTags);
+  }, [recipes, activeTags]);
 
   const toggleTag = (tag) => {
     setActiveTags(activeTags.includes(tag) ? removeTag(activeTags, tag) : addTag(activeTags, tag));
@@ -34,16 +25,6 @@ const RecipesSection = ({
   return (
     <div className="flex flex-col gap-[30px]">
       <h2 className="font-medium text-4xl text-[#9CB82E] uppercase mb-5">{title}</h2>
-
-      {showSearch && (
-        <Input
-          type="text"
-          placeholder="Search recipes..."
-          value={searchValue}
-          onChange={onSearchChange}
-          className="w-full p-4 rounded-lg border border-gray-300 text-lg mb-7.5"
-        />
-      )}
 
       {allTags.length > 0 && (
         <div className="flex flex-wrap w-full gap-2 mb-7.5">
@@ -71,7 +52,7 @@ const RecipesSection = ({
 
       {displayedRecipes.length === 0 ? (
         <p className="text-accent">
-          {showSearch || activeTags.length > 0 ? 'No recipes found.' : 'No recipes yet.'}
+          {activeTags.length > 0 ? 'No recipes found.' : 'No recipes yet.'}
         </p>
       ) : (
         <ul className="grid grid-cols-2 gap-14 w-fit">
