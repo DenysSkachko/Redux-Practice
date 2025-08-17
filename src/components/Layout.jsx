@@ -5,7 +5,9 @@ const Layout = ({ children }) => {
     <div className="flex bg-white min-h-screen w-screen">
       <Sidebar />
       <main className="flex-1 p-15 pl-40">
+        <div className="flex gap-20">
         {children}
+        </div>
       </main>
     </div>
   );

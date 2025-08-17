@@ -17,7 +17,7 @@ const RecipeTags = ({ onSelect, selectedRecipe }) => {
     setAllTags(tags);
   }, [recipes, dispatch]);
 
-  const displayedRecipes = useSelector(selectorFiltered)
+  const tagsRecipes = useSelector(selectorFiltered);
 
   return (
     <div className="flex flex-col gap-[30px]">
@@ -47,12 +47,10 @@ const RecipeTags = ({ onSelect, selectedRecipe }) => {
       )}
 
       <ul className="grid grid-cols-2 gap-14 w-fit mt-5">
-        {displayedRecipes.length === 0 ? (
-          <p className="text-accent">
-            {activeTags.length > 0 ? 'No recipes found.' : 'No recipes yet.'}
-          </p>
+        {tagsRecipes.length === 0 ? (
+          <p className="text-accent">No recipes yet</p>
         ) : (
-          displayedRecipes.map((recipe) => (
+          tagsRecipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}
               recipe={recipe}

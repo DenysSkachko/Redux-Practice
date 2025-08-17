@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRecipes } from '../store/recipeActions';
-import RecipeDetails from '../components/RecipeDetail';
-import { selectorRecipe } from '../utils/selectors';
 import PageTitle from '../components/PageTitle';
 import RecipeTags from '../components/RecipeTags';
-
-import RecipeMarks from '../components/RecipeMarks';
+import RecipePreview from '../components/RecipePreview';
+import { selectorRecipe, selectorSelectedRecipe } from '../utils/selectors';
+import { setSelectedRecipe } from '../store/selectedRecipeReducer';
 
 const Home = () => {
   const dispatch = useDispatch();
   const recipes = useSelector(selectorRecipe);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const selectedRecipe = useSelector(selectorSelectedRecipe);
 
   useEffect(() => {
     dispatch(fetchRecipes());
@@ -19,12 +18,12 @@ const Home = () => {
 
   useEffect(() => {
     if (recipes.length > 0 && !selectedRecipe) {
-      setSelectedRecipe(recipes[0]);
+      dispatch(setSelectedRecipe(recipes[0]));
     }
-  }, [recipes, selectedRecipe]);
+  }, [recipes, selectedRecipe, dispatch]);
 
   return (
-    <div className="flex gap-20">
+    <>
       <div className="w-[717px]">
         <PageTitle
           title="Food"
@@ -34,13 +33,11 @@ const Home = () => {
           buttonLink="/add"
         />
 
-        <RecipeTags onSelect={setSelectedRecipe} selectedRecipe={selectedRecipe} />
+        <RecipeTags />
       </div>
 
-      <div className="w-106 rounded-[30px] overflow-hidden">
-        {selectedRecipe && <RecipeDetails recipe={selectedRecipe} />}
-      </div>
-    </div>
+      <RecipePreview />
+    </>
   );
 };
 

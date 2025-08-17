@@ -1,22 +1,21 @@
 import { useDispatch } from 'react-redux';
-import { filterByTag } from '../store/tagActions';
+import { filterByTag, getTagColor } from '../store/tagActions';
+import { setSelectedRecipe } from '../store/selectedRecipeReducer';
 
 const RecipeCard = ({ recipe, onSelect, isSelected, tags }) => {
   const dispatch = useDispatch();
 
-  const COLORS = ['#E6AF33', '#32AFA9', '#86C693', '#74D7D3', '#4A9C5B'];
-const colorMap = {};
-
-const getTagColor = (tag) => {
-  if (!colorMap[tag]) {
-    colorMap[tag] = COLORS[Math.floor(Math.random() * COLORS.length)];
-  }
-  return colorMap[tag];
-};
+  const handleSelect = () => {
+    if (onSelect) {
+      onSelect(recipe);
+    } else {
+      dispatch(setSelectedRecipe(recipe));
+    }
+  };
 
   return (
     <li
-      onClick={() => onSelect(recipe)}
+      onClick={handleSelect}
       className={`relative w-82 h-50 overflow-hidden rounded-[30px] cursor-pointer transition-all duration-300
         ${isSelected ? 'scale-105' : ''}`}
     >

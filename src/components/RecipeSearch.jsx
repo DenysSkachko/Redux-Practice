@@ -27,7 +27,7 @@ const RecipeSearch = ({ onSelect }) => {
       />
 
       {recipes.length === 0 ? (
-        <p className="text-accent mt-2">No recipes found.</p>
+        <p className="text-accent">No recipes yet.</p>
       ) : (
         <ul className="grid grid-cols-2 gap-4 mt-2">
           {recipes.map((recipe) => (

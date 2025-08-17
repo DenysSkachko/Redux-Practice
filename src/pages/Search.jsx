@@ -1,22 +1,21 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import RecipeSearch from '../components/RecipeSearch';
-import RecipeDetails from '../components/RecipeDetail';
 import PageTitle from '../components/PageTitle';
+import RecipePreview from '../components/RecipePreview';
+import { setSelectedRecipe } from '../store/selectedRecipeReducer';
 
 const Search = () => {
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const dispatch = useDispatch();
 
   return (
-    <div className="flex gap-20">
+    <>
       <div className="w-[717px]">
         <PageTitle title="Search" />
-        <RecipeSearch onSelect={setSelectedRecipe} />
+        <RecipeSearch onSelect={(recipe) => dispatch(setSelectedRecipe(recipe))} />
       </div>
 
-      <div className="w-106 rounded-[30px] overflow-hidden">
-        {selectedRecipe && <RecipeDetails recipe={selectedRecipe} />}
-      </div>
-    </div>
+      <RecipePreview />
+    </>
   );
 };
 

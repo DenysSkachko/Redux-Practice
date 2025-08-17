@@ -13,7 +13,7 @@ const RecipeMarks = ({ onSelect, selectedRecipe }) => {
   return (
     <div className="flex flex-col gap-[30px]">
       {bookmarkedRecipes.length === 0 ? (
-        <p className="text-accent">You have no bookmarks yet.</p>
+        <p className="text-accent">No bookmarks yet.</p>
       ) : (
         <ul className="grid grid-cols-2 gap-14 w-fit mt-5">
           {bookmarkedRecipes.map((recipe) => (

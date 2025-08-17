@@ -53,9 +53,9 @@ const RecipeDetail = ({ recipe }) => {
         </ul>
         <Link
           to={`/recipe/${recipe.id}`}
-          className="px-[70px] py-[15px] rounded-[30px] w-full text-center bg-[#32AFA9] text-light font-medium text-2xl block"
+          className="px-[70px] py-[15px] rounded-[30px] w-full text-center bg-[#32AFA9] text-light font-medium text-2xl uppercase "
         >
-          VIEW RECIPE
+          View Recipe
         </Link>
       </div>
     </div>
