@@ -10,7 +10,6 @@ const Search = () => {
     <div className="flex gap-20">
       <div className="w-[717px]">
         <PageTitle title="Search" />
-
         <RecipeSearch onSelect={setSelectedRecipe} />
       </div>
 

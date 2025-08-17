@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchRecipes } from '../store/recipeActions';
 import RecipeDetails from '../components/RecipeDetail';
-import RecipeCard from '../components/RecipeCard';
 import { selectorRecipe } from '../utils/selectors';
 import PageTitle from '../components/PageTitle';
-import RecipesSection from '../components/RecipeSection';
+import RecipeTags from '../components/RecipeTags';
+
+import RecipeMarks from '../components/RecipeMarks';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Home = () => {
   }, [recipes, selectedRecipe]);
 
   return (
-    <div className="flex gap-20 ">
+    <div className="flex gap-20">
       <div className="w-[717px]">
         <PageTitle
           title="Food"
@@ -33,12 +34,7 @@ const Home = () => {
           buttonLink="/add"
         />
 
-        <RecipesSection
-          title="Explore Recipes"
-          recipes={recipes}
-          selectedRecipe={selectedRecipe}
-          onSelect={setSelectedRecipe}
-        />
+        <RecipeTags onSelect={setSelectedRecipe} selectedRecipe={selectedRecipe} />
       </div>
 
       <div className="w-106 rounded-[30px] overflow-hidden">
